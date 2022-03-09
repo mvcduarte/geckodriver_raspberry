@@ -25,69 +25,69 @@ sudo apt-get -y upgrade
 #make altinstall 
  
 sudo apt-get install -y libssl-dev openssl vim libatlas-base-dev libatlas-base-dev libhdf5-dev libhdf5-serial-dev libatlas-base-dev libjasper-dev libqtgui4 libqt4-test
-#sudo apt-get install -y python3
+sudo apt-get install -y python3
 which python
 
 echo '** Python installation completed **'
 
 # Install pip
 
-#sudo apt-get install python3-pip
+sudo apt-get install python3-pip
 
 echo '** Pip installation completed **'
 
 # Install virtualenv
 
-#sudo pip install virtualenv
+sudo pip install virtualenv
 
 echo '** Virtualenv installation completed **'
 
 # Create virtualenv
 
-#virtualenv sm_venv
-#chmod +x /home/pi/sm_venv/bin/activate
-#source /home/pi/sm_venv/bin/activate
+virtualenv sm_venv
+chmod +x /home/pi/sm_venv/bin/activate
+source /home/pi/sm_venv/bin/activate
 
 echo '** Virtual Environment installation completed **'
 
-#pip install -r requirements_raspberry.txt
+pip install -r requirements_raspberry.txt
 
 echo '** Compile geckodriver for ARM7 **'
 
 # Check https://github.com/Tahlor/geckodriver
 
-#rm -rf mozilla-central*
-#curl https://hg.mozilla.org/mozilla-central/archive/tip.zip/testing/ > t.zip
-#unzip t.zip
+rm -rf mozilla-central*
+curl https://hg.mozilla.org/mozilla-central/archive/tip.zip/testing/ > t.zip
+unzip t.zip
 # Install RUST
-#curl https://sh.rustup.rs -sSf | sh
+curl https://sh.rustup.rs -sSf | sh
 # Install some packages before compiling geckodriver
-#sudo apt install gcc-arm-linux-gnueabihf libc6-armhf-cross libc6-dev-armhf-cross
-#source $HOME/.cargo/env
-#rustup target install armv7-unknown-linux-gnueabihf
+sudo apt install gcc-arm-linux-gnueabihf libc6-armhf-cross libc6-dev-armhf-cross
+source $HOME/.cargo/env
+rustup target install armv7-unknown-linux-gnueabihf
 
 str_dir_mozilla=`ls | grep 'mozilla-central'`
 echo 'directory_mozilla='$str_dir_mozilla
 
 # Put this in testing/geckodriver/.cargo/config:
-#echo '[target.armv7-unknown-linux-gnueabihf]' >> ./$str_dir_mozilla/testing/geckodriver/.cargo/config
-#echo 'linker = "arm-linux-gnueabihf-gcc"' >> ./$str_dir_mozilla/testing/geckodriver/.cargo/config
+echo '[target.armv7-unknown-linux-gnueabihf]' >> ./$str_dir_mozilla/testing/geckodriver/.cargo/config
+echo 'linker = "arm-linux-gnueabihf-gcc"' >> ./$str_dir_mozilla/testing/geckodriver/.cargo/config
 
-#cd $str_dir_mozilla/testing/geckodriver
-#cargo build --release --target armv7-unknown-linux-gnueabihf
-#sleep 10 
+cd $str_dir_mozilla/testing/geckodriver
+cargo build --release --target armv7-unknown-linux-gnueabihf
+sleep 10 
 
 # Copy binary to /usr/local/bin
 
-#sudo cp /home/pi/$str_dir_mozilla/testing/geckodriver/target/armv7-unknown-linux-gnueabihf/release/geckodriver /usr/local/bin/
+sudo cp /home/pi/$str_dir_mozilla/testing/geckodriver/target/armv7-unknown-linux-gnueabihf/release/geckodriver /usr/local/bin/
 
 echo '** Install Firefox **'
-#sudo apt-get install firefox-esr
+sudo apt-get install firefox-esr
 
 echo '** Install Tesseract + xbvf **'
 
-#sudo apt-get install xvfb
-#sudo apt-get install tesseract-ocr
+sudo apt-get install xvfb
+sudo apt-get install tesseract-ocr
 
 echo '** Test geckodriver **'
 
